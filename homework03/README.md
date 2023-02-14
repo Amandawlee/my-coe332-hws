@@ -9,7 +9,9 @@ analyze_water.py: The first script reads from a given water quality data set (a 
 Note: If the current turbidity is already below the safe threshold, the minimum time defaults to 0.
 
 test_analyze_water.py: The second script has unit tests that tests two functions in analyze_water.py that perform simple sanity checks to make sure the the math and/or output type is correct. 
+
 Function 1, turbidity(a0,I90): This function calculates turbidity in NTU units (0 - 40) by multiplying the calibration constant, a0, and the ninety degree detector current, I90.
+
 Function 2, minimum_time(Ts,T0,d): This function calculates the minimum time required to return below a safe threshold with the following equation: Ts > T0(1-d)**b [b = log(Ts/T0)/log(1-d)] where
 	Ts = Turbidity threshold for safe water
 	T0 = Current turbidity
