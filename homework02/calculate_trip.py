@@ -81,12 +81,12 @@ def main():
         timetotravel = travel_time(distance, speed)
 
         timetosample = sample_time(generate_sites['sites'][i]['composition'])
-        print('leg = {}, time to travel = {} hr, time to sample = {} hr'.format(leg, timetotravel, timetosample))
+        print('leg = {}, time to travel = {:.2f} hr, time to sample = {} hr'.format(leg, timetotravel, timetosample))
         
         totalTime += total_time(timetotravel,(timetosample))
 
     print('===============================')
-    print('number of legs = {}, total time elapsed = {} hr'.format(leg,totalTime))
+    print('number of legs = {}, total time elapsed = {:.2f} hr'.format(leg,totalTime))
 
 if __name__ == '__main__':
     main()
