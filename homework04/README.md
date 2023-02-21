@@ -18,6 +18,7 @@ To query the Flask application, inserting the following on the command line (dep
 
 Example Output:
 $ curl http://127.0.0.1:5000/
+
 {
   "ndm": {
     "oem": {
@@ -71,6 +72,7 @@ $ curl http://127.0.0.1:5000/
 }
 
 $ http://127.0.0.1:5000/epochs
+
 [
   "2023-048T12:00:00.000Z",
   "2023-048T12:04:00.000Z",
@@ -102,6 +104,7 @@ $ http://127.0.0.1:5000/epochs
 ]
 
 $ curl http://127.0.0.1:5000/epochs/2023-063T12:00:00.000Z
+
 {
   "EPOCH": "2023-063T12:00:00.000Z",
   "X": {
@@ -131,4 +134,5 @@ $ curl http://127.0.0.1:5000/epochs/2023-063T12:00:00.000Z
 }
 
 $ curl http://127.0.0.1:5000/epochs/2023-063T12:00:00.000Z/speed
+
 7.661757196327827
