@@ -17,6 +17,7 @@ To query the Flask application, inserting the following on the command line (dep
 4) curl http://127.0.0.1:5000/epochs/<epoch>/speed (to return the value of the instantaneous speed for a specific Epoch from the data set)
 
 Example Output:
+
 $ curl http://127.0.0.1:5000/
 
 {
