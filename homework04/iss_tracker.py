@@ -10,10 +10,16 @@ data = xmltodict.parse(response.text)
 
 @app.route('/', methods = ['GET'])
 def entire_data_set() -> dict:
+    """
+    Returns data from URL as a dictionary
+    """
     return(data)
 
 @app.route('/epochs', methods = ['GET'])
 def epochs() -> list:
+    """
+    Returns epochs as a list from the dictionary
+    """
     allEpochs = []
     for d in data['ndm']['oem']['body']['segment']['data']['stateVector']:
         allEpochs.append(d['EPOCH'])
@@ -21,6 +27,13 @@ def epochs() -> list:
 
 @app.route('/epochs/<epoch>', methods = ['GET'])
 def state_vector(epoch) -> list:
+    """
+    Returns the state vector for a specific epoch
+
+    Input: epoch (Epoch time stamp)
+
+    Returns: stateVector
+    """
     allEpochs = epochs()
     if epoch in allEpochs:
         specific = allEpochs.index(epoch)
@@ -31,6 +44,14 @@ def state_vector(epoch) -> list:
 
 @app.route('/epochs/<epoch>/speed', methods = ['GET'])
 def speed(epoch) -> float:
+    """
+    Reads the list of epochs and calculates the instantaneous speed from a \
+            specific epoch time stamp from the state vector
+
+    Input: epoch (Epoch time stamp)
+
+    Returns: speed
+    """
     allEpochs = epochs()
     if epoch in allEpochs:
         epochData = state_vector(epoch)
