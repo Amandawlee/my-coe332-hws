@@ -40,7 +40,6 @@ $ curl http://127.0.0.1:5000...
 
 <code>limit</code> controls how many epoch time stamp results are returned, and <code>offset</code> sets the starting point of epochs with an integer. For example when <code>offset=0</code>, it will begin printing at the first Epoch time stamp.
 
-
 Running <code>curl http://127.0.0.1:5000/</code>:
 
 ```
