@@ -21,7 +21,7 @@ Use <code>git clone git@github.com:Amandawlee/my-coe332-hws.git</code> to clone 
 
 Third Method:
 
-Pull a prebuilt image on Docker Hub with <code>docker pull awl/iss_tracker:hw05</code>  and run it using <code>docker run -it --rm -p 5000:5000 amandwlee/iss_tracker:hw05</code>.
+Pull a prebuilt image on Docker Hub with <code>docker pull amandawlee/iss_tracker:hw05</code>  and run it using <code>docker run -it --rm -p 5000:5000 amandawlee/iss_tracker:hw05</code>.
 
 ## Example Output:
 
