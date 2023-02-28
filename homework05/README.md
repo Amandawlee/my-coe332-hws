@@ -27,22 +27,22 @@ Pull a prebuilt image on Docker Hub with <code>docker pull awl/iss_tracker:hw05<
 
 To query the Flask application, inserting the following on the command line (depending on what information you would like to see):
 
-'''
+```
 $ curl http://127.0.0.1:5000...
         /                                  Returns entire data set
         /epochs                            Returns list of all Epochs in the data set
         /epochs?limit=int&offset=int       Returns modified list of Epochs given query parameters
-        /epochs/(epoch)                    Returns state vectors for a specific Epoch from the data set
-        /epochs/(epoch)/speed              Returns instantaneous speed for a specific Epoch in the data set
+        /epochs/<epoch>                    Returns state vectors for a specific Epoch from the data set
+        /epochs/<epoch>/speed              Returns instantaneous speed for a specific Epoch in the data set
         /help                              Returns help text that briefly describes each route
         /delete-data                       Deletes all data from the dictionary object
         /post-data                         Reloads the dictionary object with data from the web
-'''
+```
 
 <code>limit</code> controls how many epoch time stamp results are returned, and <code>offset</code> sets the starting point of epochs with an integer. For example when <code>offset=0</code>, it will begin printing at the first Epoch time stamp.
 Running <code>curl http://127.0.0.1:5000/</code>:
 
-'''
+```
 [vm] $ curl http://127.0.0.1:5000/
 {
   "ndm": {
@@ -95,11 +95,11 @@ Running <code>curl http://127.0.0.1:5000/</code>:
 .
 .
 }
-'''
+```
 
 Running <code>curl http://127.0.0.1:5000/epochs</code>:
 
-'''
+```
 [vm] $ curl http://127.0.0.1:5000/epochs
 [
   "2023-048T12:00:00.000Z",
@@ -130,11 +130,11 @@ Running <code>curl http://127.0.0.1:5000/epochs</code>:
 .
 .
 ]
-'''
+```
 
 Running <code>curl 'http://127.0.0.1:5000/epochs?limit=5&offset=50'</code>:
 
-'''
+```
 [vm] $ curl 'http://127.0.0.1:5000/epochs?limit=5&offset=50'
 [
   "2023-058T15:20:00.000Z",
@@ -143,11 +143,11 @@ Running <code>curl 'http://127.0.0.1:5000/epochs?limit=5&offset=50'</code>:
   "2023-058T15:32:00.000Z",
   "2023-058T15:36:00.000Z"
 ]
-'''
+```
 
 Running <code>curl http://127.0.0.1:5000/epochs/2023-058T15:36:00.000Z</code>:
 
-'''
+```
 [vm] $ curl http://127.0.0.1:5000/epochs/2023-058T15:36:00.000Z
 {
   "EPOCH": "2023-058T15:36:00.000Z",
@@ -176,18 +176,18 @@ Running <code>curl http://127.0.0.1:5000/epochs/2023-058T15:36:00.000Z</code>:
     "@units": "km/s"
   }
 }
-'''
+```
 
 Running <code>curl http://127.0.0.1:5000/epochs/2023-058T15:36:00.000Z/speed</code>:
 
-'''
+```
 [vm] $ curl http://127.0.0.1:5000/epochs/2023-058T15:36:00.000Z/speed
 7.666149738913929
-'''
+```
 
 Running <code>curl http://127.0.0.1:5000/help</code>:
 
-'''
+```
 [vm] $ curl http://127.0.0.1:5000/help
 Access elements from the NASA ISS Trajectory data set with the following routes:
 $ curl http://127.0.0.1:5000...
@@ -199,18 +199,18 @@ $ curl http://127.0.0.1:5000...
         /help                              Returns help text that briefly describes each route
         /delete-data                       Deletes all data from the dictionary object
         /post-data                         Reloads the dictionary object with data from the web
-'''
+```
 
 Running <code>curl -X DELETE http://127.0.0.1:5000/delete-data</code>:
 
-'''
+```
 [vm] $ curl -X DELETE http://127.0.0.1:5000/delete-data
 NASA ISS trajectory data set has been deleted.
-'''
+```
 
 Running <code>curl -X POST http://127.0.0.1:5000/post-data</code>:
 
-'''
+```
 [vm] $ curl -X POST http://127.0.0.1:5000/post-data
 
-'''
+```
