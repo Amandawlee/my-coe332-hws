@@ -115,7 +115,7 @@ def speed(epoch) -> float:
         speed = math.sqrt(x_dot**2 + y_dot**2 + z_dot**2)
         return(str(speed) + '\n')
     else:
-        return('Please enter a valid Epoch time stamp.')
+        return('Please enter a valid Epoch time stamp.\n')
 
 @app.route('/help', methods = ['GET'])
 def help() -> str:
