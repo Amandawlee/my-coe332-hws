@@ -1,0 +1,22 @@
+---
+version: "3"
+
+services:
+    redis-db:
+        image: redis:7
+        ports:
+            - 6379:6379
+        volumes:
+            - ./data:/data
+        user: "1000:1000"
+    flask-app:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        depends_on:
+            - redis-db
+        image: amandawlee/gene_api:1.0
+        ports:
+            - 5000:5000
+        volumes:
+            - ./config.yaml:/config.yaml
