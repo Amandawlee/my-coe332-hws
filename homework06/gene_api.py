@@ -60,7 +60,7 @@ def get_hgnc_ids() -> list:
             hgnc_ids_list.append(gene_data['hgnc_id'])
     return(hgnc_ids_list)
 
-@app.route('/genes'/<hgnc_id>, methods = ['GET'])
+@app.route('/genes/<hgnc_id>', methods = ['GET'])
 def get_hgnc_id_data(hgnc_id) -> list:
     """
     """
