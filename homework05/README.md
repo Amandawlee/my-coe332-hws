@@ -16,7 +16,7 @@ To run the Flask application, insert the following on the command line: <code>fl
 
 Second Method:
 
-Use <code>git clone git@github.com:Amandawlee/my-coe332-hws.git</code> to clone the repository to your local system. Then, locate the file through <code>cd my-coe332-hws/homework05</code>. Build a Docker image locally from the Dockerfile with <code>docker build -t username/iss_tracker:hw05 .</code>. Then, run the image as a container with <code>docker run -it --rm -p 5000:5000 username/iss_tracker:hw05</code>.
+Use <code>git clone git@github.com:Amandawlee/my-coe332-hws.git</code> to clone the repository to your local system. Then, locate the file through <code>cd my-coe332-hws/homework05</code>. Build a Docker image locally from the Dockerfile with <code>docker build -t username/iss_tracker:hw05 .</code>. Then, run the image as a container with <code>docker run -it --rm -p 5000:5000 username/iss_tracker:hw05</code>. Replace <code>username</code> with your username for Docker Hub.
 
 Third Method:
 
