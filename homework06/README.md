@@ -1,4 +1,4 @@
-# "Say It' Ain't Genes
+# "Say It Ain't Genes
 
 The Human Genome Organization (HUGO) is a non-profit organization that runs the HUGO Gene Noomenclature Committee (HGNC) in approving "a unique and meaningful name for every gene".
 
@@ -24,7 +24,7 @@ Pull a prebuilt image on Docker Hub with <code>docker pull amandawlee/gene_api:1
 
 Fourth Method:
 
-Run the Flask application by using the <code>docker-compose.yaml</code> file with the command, <code>docker-compose up -d</code>.
+Make a directory with <code>mkdir data</code> for the Redis database to mount a volume. Then, run the Flask application by using the <code>docker-compose.yaml</code> file with the command, <code>docker-compose up -d</code>.
 
 ## Example Output:
 
@@ -39,8 +39,183 @@ $ curl http://127.0.0.1:5000...
 	/genes/<hgnc_id>	Returns all data associated with a given <hgnc_id>
 ```
 
-Running <code>curl http://127.0.0.1:5000/data -X POST</code>:
+Running <code>curl http://127.0.0.1:5000/data -X GET</code>:
 
 ```
-[vm] $ curl http://127.0.0.1:5000/data -X POST
+[vm] $ curl http://127.0.0.1:5000/data -X GET
+HGNC data has been loaded to a Redis database.
+```
 
+Running <code>curl http://127.0.0.1:5000/data -X GET</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/data -X GET
+{
+.
+.
+.
+{
+    "_version_": 1761599377614307329,
+    "agr": "HGNC:13703",
+    "alias_symbol": [
+      "MAK16L"
+    ],
+    "ccds_id": [
+      "CCDS6089"
+    ],
+    "date_approved_reserved": "2000-10-19",
+    "date_modified": "2023-01-20",
+    "date_name_changed": "2015-07-03",
+    "date_symbol_changed": "2008-06-04",
+    "ena": [
+      "AF251062"
+    ],
+    "ensembl_gene_id": "ENSG00000198042",
+    "entrez_id": "84549",
+    "gene_group": [
+      "RNA binding motif containing"
+    ],
+    "gene_group_id": [
+      725
+    ],
+    "hgnc_id": "HGNC:13703",
+    "location": "8p12",
+    "location_sortable": "08p12",
+    "locus_group": "protein-coding gene",
+    "locus_type": "gene with protein product",
+    "mane_select": [
+      "ENST00000360128.11",
+      "NM_032509.4"
+    ],
+    "mgd_id": [
+      "MGI:1915170"
+    ],
+    "name": "MAK16 homolog",
+    "orphanet": 470626,
+    "prev_name": [
+      "RNA binding motif protein 13",
+      "MAK16 homolog (S. cerevisiae)"
+    ],
+    "prev_symbol": [
+      "RBM13"
+    ],
+    "pubmed_id": [
+      29245012,
+      29557065
+    ],
+    "refseq_accession": [
+      "NM_032509"
+    ],
+    "rgd_id": [
+      "RGD:1311297"
+    ],
+    "status": "Approved",
+    "symbol": "MAK16",
+    "ucsc_id": "uc003xjj.4",
+    "uniprot_ids": [
+      "Q9BXY0"
+    ],
+    "uuid": "e4a49609-b7dd-4be6-ba75-0cac2eda85ad",
+    "vega_id": "OTTHUMG00000163957"
+  }
+]
+```
+
+Running <code>curl http://127.0.0.1:5000/data -X DELETE</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/data -X DELETE
+HGNC data has ben deleted from Redis database.
+```
+
+Running <code>curl http://127.0.0.1:5000/genes</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/genes
+[
+.
+.
+.
+  "HGNC:1766",
+  "HGNC:16063",
+  "HGNC:20024",
+  "HGNC:17677",
+  "HGNC:51443",
+  "HGNC:32025",
+  "HGNC:16350",
+  "HGNC:15265",
+  "HGNC:52950",
+  "HGNC:24592",
+  "HGNC:15822",
+  "HGNC:24352",
+  "HGNC:54766",
+  "HGNC:26633"
+.
+.
+.
+]
+```
+
+Running <code>curl http://127.0.0.1:5000/genes</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/genes
+{
+  "_version_": 1761544682705256448,
+  "agr": "HGNC:1766",
+  "ccds_id": [
+    "CCDS82259",
+    "CCDS11993"
+  ],
+  "date_approved_reserved": "1997-02-10",
+  "date_modified": "2023-01-20",
+  "date_name_changed": "2016-01-15",
+  "ena": [
+    "AB035301"
+  ],
+  "ensembl_gene_id": "ENSG00000081138",
+  "entrez_id": "1005",
+  "gene_group": [
+    "Type II classical cadherins"
+  ],
+  "gene_group_id": [
+    1186
+  ],
+  "hgnc_id": "HGNC:1766",
+  "location": "18q22.1",
+  "location_sortable": "18q22.1",
+  "locus_group": "protein-coding gene",
+  "locus_type": "gene with protein product",
+  "mane_select": [
+    "ENST00000397968.4",
+    "NM_004361.5"
+  ],
+  "mgd_id": [
+    "MGI:2442792"
+  ],
+  "name": "cadherin 7",
+  "omim_id": [
+    "605806"
+  ],
+  "prev_name": [
+    "cadherin 7, type 2"
+  ],
+  "pubmed_id": [
+    9615235
+  ],
+  "refseq_accession": [
+    "NM_033646"
+  ],
+  "rgd_id": [
+    "RGD:1306856"
+  ],
+  "status": "Approved",
+  "symbol": "CDH7",
+  "ucsc_id": "uc002lkb.4",
+  "uniprot_ids": [
+    "Q9ULB5"
+  ],
+  "uuid": "59ea51cf-2caf-4b9e-9624-58c5e6d917ca",
+  "vega_id": "OTTHUMG00000132800"
+}
+```
