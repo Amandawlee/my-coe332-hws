@@ -26,7 +26,7 @@ def data() -> list:
     if request.method == 'POST':
         response = requests.get(url = 'https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
         gene_data = response.json()
-        for item in list_of_dict:
+        for item in gene_data:
             key = f"{item['hgnc_id']}"
             rd.hset(key, mapping = item)
         return("HGNC data has been loaded to a Redis database.\n")
