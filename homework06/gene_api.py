@@ -15,7 +15,7 @@ def get_redis_client():
     Returns:
         Redis client
     """
-    return redis.Redis(host='127.0.0.1', port=6379, db=0, decode_responses=True)
+    return redis.Redis(host='redis-db', port=6379, db=0, decode_responses=True)
 
 rd = get_redis_client()
 
@@ -32,8 +32,8 @@ def data() -> list:
         return("HGNC data has been loaded to a Redis database.\n")
     elif request.method == 'GET':
         gene_data = []
-        for key in rd.keys():
-            gene_data.append(rd.hgetall(key))
+        for item in rd.keys():
+            gene_data.append(rd.hgetall(item))
         return(gene_data)
     elif request.method == 'DELETE':
         rd.flushdb()
