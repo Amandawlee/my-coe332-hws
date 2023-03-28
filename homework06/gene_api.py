@@ -5,7 +5,7 @@ import redis
 
 app = Flask(__name__)
 
-gene_data = []
+gene_data = {}
 
 def get_redis_client():
     """
@@ -62,7 +62,7 @@ def get_hgnc_ids() -> list:
     return(hgnc_ids_list)
 
 @app.route('/genes/<hgnc_id>', methods = ['GET'])
-def get_hgnc_id_data(hgnc_id) -> list:
+def get_hgnc_id_data(hgnc_id) -> dict:
     """
     """
     if len(rd.keys()) == 0:
