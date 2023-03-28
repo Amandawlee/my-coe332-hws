@@ -15,7 +15,7 @@ def get_redis_client():
     Returns:
         Redis client
     """
-    return redis.Redis(host='redis-db', port=6379, db=0, decode_responses=True)
+    return redis.Redis(host='redis-db', port=6379, db=0,decode_reponses=True)
 
 rd = get_redis_client()
 
@@ -43,7 +43,7 @@ def data():
 
         for item in data['response']['docs']:
             key = f'{item["hgnc_id"]}'
-            rd.set(item.get(key, json.dumps(item))
+            rd.set(item.get(key), json.dumps(item))
         return("HGNC data has been loaded to a Redis database.\n")
     elif request.method == 'GET':
         gene_data = []
