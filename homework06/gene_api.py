@@ -5,6 +5,8 @@ import redis
 
 app = Flask(__name__)
 
+gene_data = []
+
 def get_redis_client():
     """
     Generates a Python Redis client
@@ -27,7 +29,7 @@ def data() -> list:
         response = requests.get(url = 'https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
         gene_data = response.json()
         for item in gene_data:
-            key = f"{item['hgnc_id']}"
+            key = f"{item['response']['docs']['hgnc_id']}"
             rd.hset(key, mapping = item)
         return("HGNC data has been loaded to a Redis database.\n")
     elif request.method == 'GET':
