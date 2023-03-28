@@ -40,7 +40,7 @@ def data() -> list:
         return(gene_data)
     elif request.method == 'DELETE':
         rd.flushdb()
-        return("HGNC data has ben deleted from Redis database. There are {rd.keys()} keys in the database.\n")
+        return("HGNC data has ben deleted from Redis database.\n")
     else:
         return("The method you tried does not work..\n")
 
@@ -62,7 +62,7 @@ def get_hgnc_ids() -> list:
     return(hgnc_ids_list)
 
 @app.route('/genes/<hgnc_id>', methods = ['GET'])
-def get_hgnc_id_data(hgnc_id) -> dict:
+def get_hgnc_id_data(hgnc_id) -> list:
     """
     """
     if len(rd.keys()) == 0:
@@ -71,8 +71,8 @@ def get_hgnc_id_data(hgnc_id) -> dict:
     for key in rd.keys():
         if str(key) == str(hgnc_id):
             return(json.loads(rd.get(key))
-        else:        
-            return("HGNC ID doesn't match any IDs in the database.\n")
+        
+    return("HGNC ID doesn't match any IDs in the database.\n")
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
