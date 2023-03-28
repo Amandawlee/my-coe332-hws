@@ -20,9 +20,10 @@ def get_redis_client():
 rd = get_redis_client()
 
 @app.route('/data', methods = ['POST','GET','DELETE'])
-def data() -> list:
+def data():
     """
     """
+    global rd
     if request.method == 'POST':
         response = requests.get(url = 'https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
         gene_data = response.json()
@@ -42,7 +43,7 @@ def data() -> list:
         return("The method you tried does not work.\n")
 
 @app.route('/genes', methods = ['GET'])
-def get_hgnc_ids() -> list:
+def get_hgnc_ids():
     """
     Returns a json-formatted list of all HGNC_ID fields
 
@@ -59,7 +60,7 @@ def get_hgnc_ids() -> list:
     return(hgnc_ids_list)
 
 @app.route('/genes/<hgnc_id>', methods = ['GET'])
-def get_hgnc_id_data(hgnc_id) -> list:
+def get_hgnc_id_data(hgnc_id):
     """
     """
     if len(rd.keys()) == 0:
@@ -67,7 +68,9 @@ def get_hgnc_id_data(hgnc_id) -> list:
 
     for key in rd.keys():
         if str(key) == str(hgnc_id):
-            return(json.loads(rd.get(key))
+            return(json.loads(rd.get(key)))
     
+    return("The given HGNC ID does not match any IDs in the database.\n")
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
