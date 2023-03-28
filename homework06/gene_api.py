@@ -68,7 +68,6 @@ def get_hgnc_id_data(hgnc_id) -> list:
     for key in rd.keys():
         if str(key) == str(hgnc_id):
             return(json.loads(rd.get(key))
-    return("The given HGNC ID does not match any IDs in the database.\n")
-
+    
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
