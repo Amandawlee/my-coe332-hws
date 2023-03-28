@@ -5,8 +5,6 @@ import redis
 
 app = Flask(__name__)
 
-gene_data = {}
-
 def get_redis_client():
     """
     Generates a Python Redis client
@@ -30,19 +28,18 @@ def data() -> list:
         gene_data = response.json()
 
         for item in gene_data['response']['docs']:
-            key = f"{item['hgnc_id']}"
-            rd.set(key, json.dumps(item))
+            rd.set(item.get('hgnc_id'), json.dumps(item))
         return("HGNC data has been loaded to a Redis database.\n")
     elif request.method == 'GET':
         gene_data = []
-        for item in rd.keys():
-            gene_data.append(json.loads(rd.get(item)))
+        for key in rd.keys():
+            gene_data.append(json.loads(rd.get(key)))
         return(gene_data)
     elif request.method == 'DELETE':
         rd.flushdb()
         return("HGNC data has ben deleted from Redis database.\n")
     else:
-        return("The method you tried does not work..\n")
+        return("The method you tried does not work.\n")
 
 @app.route('/genes', methods = ['GET'])
 def get_hgnc_ids() -> list:
@@ -71,8 +68,7 @@ def get_hgnc_id_data(hgnc_id) -> list:
     for key in rd.keys():
         if str(key) == str(hgnc_id):
             return(json.loads(rd.get(key))
-        
-    return("HGNC ID doesn't match any IDs in the database.\n")
+    return("The given HGNC ID does not match any IDs in the database.\n")
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
