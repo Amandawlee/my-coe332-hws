@@ -1,0 +1,29 @@
+---
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: awl-test-redis-deployment
+   labels:
+     app: awl-test-redis
+     username: awl
+     env: test
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: awl-test-redis
+   template:
+     metadata:
+       labels:
+         app: awl-test-redis
+     spec:
+       containers:
+         - name: redis
+           image: redis:7
+           volumeMounts:
+           - name: awl-test-gene-data
+             mountPath: "/data"
+       volumes:
+       - name: awl-test-gene-data
+         persistentVolumeClaim:
+           claimName: awl-test-gene-data
