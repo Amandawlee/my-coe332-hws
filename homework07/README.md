@@ -1,8 +1,8 @@
-# "Say It Ain't Genes
+# "In The Kubernetes"
 
 The Human Genome Organization (HUGO) is a non-profit organization that runs the HUGO Gene Noomenclature Committee (HGNC) in approving "a unique and meaningful name for every gene".
 
-The homework06 directory consists of four files: <code>gene_api.py</code>, <code>README.md</code>, <code>Dockerfile</code>, and <code>docker-compose.yaml</code>.
+The homework07 directory consists of nine files.
 
 The <code>gene_api.py</code> file queries and returns information about genes found in the the human genome, approved by the HGNC, setting standards for human gene nomenclature. The complete set of HGNC data was downloaded and injected into a Redis database through a Flask application.
 
@@ -26,6 +26,19 @@ Fourth Method:
 
 Make a directory with <code>mkdir data</code> for the Redis database to mount a volume. Then, run the Flask application by using the <code>docker-compose.yaml</code> file with the command, <code>docker-compose up -d</code>.
 
+## Kubernetes:
+
+In order for the Flask container to deploy to a Kubernetes cluster,
+
+1) Clone the repository to a system with access to the Kubernetes API, using <code>git clone git@github.com:Amandawlee/my-coe332-hws.git</code>, and head into the directory with the command, <code>cd my-coe332-hws/homework07/</code>.
+
+2) From the built Docker image (from the instructions above), replace the Docker username in the line <code>image: awl/gene-api:1.0</code> to your username.
+
+3) Set up the PVC to save the Redis data from the Flask app with the command <code>kubectl apply -f awl-test-redis-pvc.yml</code>.
+
+4) Create a Deployment for the Redis database with the command <code>kubectl apply -f awl-test-redis-deployment.yml</code>.
+
+5) Start the service with the command <code>kubectl apply -f awl-test-redis-service.yml. Get the IP address for this service with the command <code>kubectl get services</code> and copy the IP address for the Redis service. In the <code>awl-test-flask-deployment.yml</code> file, change the line that says <code>value: 10.233.15.94</code> to the copied IP address.
 ## Example Output:
 
 To query the Flask application, inserting the following on the command line (depending on what information you would like to see):
