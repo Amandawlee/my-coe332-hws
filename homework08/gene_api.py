@@ -90,6 +90,13 @@ def get_hgnc_id_data(hgnc_id):
 @app.route('/image', methods = ['POST','GET','DELETE'])
 def image() -> bytes:
     """
+    Manipulate image in database with given method
+
+    Methods:
+        "POST":     Reads some portion of data out of the database, runs some matplotlib code to create a simple plot of that data, and then writes the plot back into the database (db = 1)
+        "GET":      Returns the image to the user (if present in the database)
+        "DELETE":   Deletes the image from the database
+
     Args:
         No arguments
 
@@ -128,10 +135,10 @@ def image() -> bytes:
             return send_file(path, mimetype = 'image/png', as_attachment = True)
     elif request.method == 'DELETE':
         if b'image' not in rd2.keys():
-            return("Image can not be found or has not been loaded.\n")
+            return("The HGNC ID data plot image has been deleted from Redis.\n")
         else:
             rd2.delete('image')
-            return("HGNC data image has been deleted from Redis.\n")
+            return("Image can not be found or has not been loaded.\n")
     else:
         return("The method you tried does not work.\n")
 

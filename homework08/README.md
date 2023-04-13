@@ -38,7 +38,12 @@ In order for the Flask container to deploy to a Kubernetes cluster,
 
 4) Create a Deployment for the Redis database with the command <code>kubectl apply -f awl-test-redis-deployment.yml</code>.
 
-5) Start the service with the command <code>kubectl apply -f awl-test-redis-service.yml. Get the IP address for this service with the command <code>kubectl get services</code> and copy the IP address for the Redis service. In the <code>awl-test-flask-deployment.yml</code> file, change the line that says <code>value: 10.233.15.94</code> to the copied IP address.
+5) Start the service with the command <code>kubectl apply -f awl-test-redis-service.yml</code>. Get the IP address for this service with the command <code>kubectl get services</code> and copy the IP address for the Redis service. In the <code>awl-test-flask-deployment.yml</code> file, change the line that says <code>value: 10.233.15.94</code> to the copied IP address.
+
+6) Set up the Flask Deployment with the command <code>kubectl apply -f awl646-test-flask-deployment.yml</code>.
+
+7) In order to get a persistent IP address for the Flask application, use the command <code>kubectl apply -f awl646-test-flask-service.yml</code>. Then, run <code>kubectl get services</code> to use the IP address to run routes for the Flask application. Replace <code>127.0.0.1</code> with the IP address from your Flask service (from the Example Outputs).
+
 ## Example Output:
 
 To query the Flask application, inserting the following on the command line (depending on what information you would like to see):
@@ -50,6 +55,9 @@ $ curl http://127.0.0.1:5000...
 	/data -X DELETE		Deletes HGNC data from Redis database
 	/genes			Returns a json-formatted list of all <hgnc_id> fields
 	/genes/<hgnc_id>	Returns all data associated with a given <hgnc_id>
+	/image -X POST		Reads some portion of data out of the database, runs some matplotlib code to create a simple plot of that data, and then writes the plot back into the database (db = 1)
+	/image -X GET		Returns the image to the user (if present in the database)
+	/image -X DELETE	Deletes the image from the database
 ```
 
 Running <code>curl http://127.0.0.1:5000/data -X GET</code>:
@@ -232,3 +240,25 @@ Running <code>curl http://127.0.0.1:5000/genes</code>:
   "vega_id": "OTTHUMG00000132800"
 }
 ```
+
+Running <code>curl http://127.0.0.1:5000/image -X POST</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/data -X POST
+The HGNC ID data plot image has been loaded to Redis.
+```
+
+Running <code>curl http://127.0.0.1:5000/image -X GET</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/data -X GET
+
+```
+
+Running <code>curl http://127.0.0.1:5000/image -X POST</code>:
+
+```
+[vm] $ curl http://127.0.0.1:5000/data -X POST
+The HGNC ID data plot image has been deleted from Redis.
+```
+
