@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: awl-test-flask-deployment
+  labels:
+    app: awl-test-flask
+    username: awl
+    env: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: awl-test-flask
+      username: awl
+      env: test
+  template:
+    metadata:
+      labels:
+        app: awl-test-flask
+        username: awl
+        env: test
+    spec:
+      containers:
+        - name: awl-test-flask
+          imagePullPolicy: Always
+          image: amandawlee/gene_api:1.0
+          env:
+          - name: REDIS_IP
+            value: 10.233.15.94
+          ports:
+          - name: http
+            containerPort: 5000
+          volumeMounts:
+          - name: awl-test-gene-data
+            persistentVolumeClaim:
+              claimName: awl-test-gene-data
