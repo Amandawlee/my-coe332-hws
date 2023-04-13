@@ -13,7 +13,7 @@ if not redis_ip:
     raise Exception()
 
 rd = redis.StrictRedis(host = redis_ip, port = 6379, db = 0, decode_responses = True)
-rd2 = redis.StrcitRedis(host = redis_ip, port = 6379, db = 1)
+rd2 = redis.StrictRedis(host = redis_ip, port = 6379, db = 1)
 
 @app.route('/data', methods = ['POST','GET','DELETE'])
 def data():
