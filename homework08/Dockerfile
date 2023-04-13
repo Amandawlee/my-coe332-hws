@@ -10,4 +10,4 @@ RUN pip install numpy
 
 ADD ./gene_api.py /gene_api.py
 
-CMD ["python3", "gene_api.py"]
+CMD ["python", "gene_api.py"]
