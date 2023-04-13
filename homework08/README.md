@@ -244,21 +244,26 @@ Running <code>curl http://127.0.0.1:5000/genes</code>:
 Running <code>curl http://127.0.0.1:5000/image -X POST</code>:
 
 ```
-[vm] $ curl http://127.0.0.1:5000/data -X POST
+[vm] $ curl http://127.0.0.1:5000/image -X POST
 The HGNC ID data plot image has been loaded to Redis.
 ```
 
 Running <code>curl http://127.0.0.1:5000/image -X GET</code>:
 
 ```
-[vm] $ curl http://127.0.0.1:5000/data -X GET
+[vm] $ curl http://127.0.0.1:5000/image -X GET
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+.
+.
+.
+```
+An image of the bar graph will be returned.
+
+Running <code>curl http://127.0.0.1:5000/image -X DELETE</code>:
 
 ```
-
-Running <code>curl http://127.0.0.1:5000/image -X POST</code>:
-
-```
-[vm] $ curl http://127.0.0.1:5000/data -X POST
+[vm] $ curl http://127.0.0.1:5000/image -X DELETE
 The HGNC ID data plot image has been deleted from Redis.
 ```
 
