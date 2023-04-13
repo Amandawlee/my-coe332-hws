@@ -100,12 +100,29 @@ def image() -> bytes:
         if len(rd.keys()) == 0:
             return("HGNC data has been loaded to a Redis database.\n")
         else:
-            
+            plot_data = {}
+            for item in rd.keys():
+                key = json.loads(rd.get(item)['locus_type'])
+                if key not in plot_data:
+                    plot_data[key] = 1
+                else:
+                    plot_data[key] += 1
+            locus_types = [i for i in plot_data.key()]
+            frequency_count = [i for i in plot_data.value()]
+            plt.bar(locus_types, frequency_count)
+            plt.title("Frequency of Genes for Each Locus Type")
+            plt.xlabel("Locus Types")
+            plt.ylabel("Gene Frequency Count")
+            plt.savefig('./data/locus_types.png')
+            plt.show()
+            file_bytes = open('./data/locus_types.png', 'rb').read()
+            rd2.set('image', file_bytes)
+            return("The HGNC ID data plot image has been loaded to Redis.\n")
     elif request.method == 'GET':
         if b'image' not in rd2.keys():
             return("Image can not be found or has not been loaded.\n")
         else:
-            path = './data/getimage.png'
+            path = './data/plotimage.png'
             with open(path, 'wb') as f:
                 f.write(rd2.get('image'))
             return send_file(path, mimetype = 'image/png', as_attachment = True)

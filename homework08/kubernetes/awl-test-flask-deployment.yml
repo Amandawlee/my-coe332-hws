@@ -12,14 +12,10 @@ spec:
   selector:
     matchLabels:
       app: awl-test-flask
-      username: awl
-      env: test
   template:
     metadata:
       labels:
         app: awl-test-flask
-        username: awl
-        env: test
     spec:
       containers:
         - name: awl-test-flask
@@ -31,7 +27,3 @@ spec:
           ports:
           - name: http
             containerPort: 5000
-          volumeMounts:
-          - name: awl-test-gene-data
-            persistentVolumeClaim:
-              claimName: awl-test-gene-data
